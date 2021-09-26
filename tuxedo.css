@@ -1,0 +1,10 @@
+.tuxedo {
+	position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2147483647; /* it's the max */
+  /* Works on chrome >= 76 based on https://caniuse.com/css-backdrop-filter */
+  backdrop-filter: grayscale(1);
+}
