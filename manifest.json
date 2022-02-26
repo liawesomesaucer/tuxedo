@@ -1,22 +1,17 @@
 {
   "name": "Tuxedo",
   "description": "Selectively make websites black and white to make them less distracting",
-  "version": "0.0",
+  "version": "1.0",
   "manifest_version": 3,
   "content_scripts": [
     {
-      "matches": [
-        "https://*.facebook.com/*",
-        "https://*.reddit.com/*",
-        "https://*.youtube.com/*",
-        "https://*.messenger.com/*"
-      ],
+      "matches": ["<all_urls>"],
       "css": ["tuxedo.css"],
       "js": ["tuxedo.js"],
-      "run_at": "document_end"
+      "run_at": "document_start"
     }
   ],
-  "permissions": ["tabs"],
+  "permissions": ["tabs", "storage"],
   "host_permissions": [
   ],
   "action": {
