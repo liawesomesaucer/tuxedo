@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Didact+Gothic&display=swap');
+
+.App {
+  width: 300px;
+  font-family: 'Didact Gothic', sans-serif;
+  background-color: #47485F;
+  color: white;
+  min-height: 420px;
+  padding: 10px;
+}
+
+h1 {
+  color: #e2d48b;
+  font-size: 48px;
+  letter-spacing: 4px;
+  margin: 10px 0;
+  text-align: center;
+}
+
+p {
+  font-size: 14px;
+}
+
+input {
+  font-size: 14px;
+  display: block;
+  width: 100%;
+  outline: none;
+  border: none;
+  appearance: none;
+  border-radius: 0;
+  padding: 4px 0;
+}
+
+.tuxedo__blocked-site-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.tuxedo__blocked-site-list-item {
+  background: white;
+  color: #47485f;
+  padding: 8px;
+  display: flex;
+  justify-content: space-between;
+  vertical-align: middle;
+}
+
+.tuxedo__blocked-site-list-item > span {
+  display: flex;
+  align-items: center;
+}
+
+.tuxedo__blocked-site-list-item button {
+  /* TODO */
+}
+
+.tuxedo__blocked-site-icon {
+  display: inline-block;
+  margin-right: 8px;
+  width: 24px;
+}
+
+.tuxedo__blocked-site-icon-letter {
+  background-color: #47485f;
+  color: #e2d48b;
+  font-size: 18px;
+  height: 24px;
+  text-align: center;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
