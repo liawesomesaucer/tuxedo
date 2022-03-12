@@ -8,7 +8,9 @@ export function useBlockHosts() {
   const [blockedHosts, setBlockedHosts] = useState(storageValue)
 
   useEffect(() => {
-    setBlockedHosts(storageValue)
+    setBlockedHosts(
+      Object.fromEntries(Object.entries(storageValue).filter(([k, v]) => !!v))
+    );
   }, [storageValue])
 
   const blockHost = (host) => partialUpdateStorageValue(host, true)

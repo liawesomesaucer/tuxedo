@@ -43,8 +43,6 @@ export function useChromeSyncStorage() {
     chrome.storage.local.set(storageValue)
   }, [storageValue])
 
-  // Utility functions for easier updates
-
   return {
     storageValue,
     setStorageValue,

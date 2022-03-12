@@ -2,31 +2,84 @@
 
 import React, { useEffect, useState } from 'react';
 import { useBlockHosts } from './hooks/useBlockHosts';
+import {
+  CrossButton,
+  PlusButton,
+  LetterIcon,
+  LeftIcon,
+  RightIcon,
+} from './components/Icons';
 
 // Next: support default lists, support adding dynamic site blocker. Eventually
-// support pagination?
 // Also support sorting
+const PAGE_SIZE = 5;
 
 export function Tuxedo() {
+  const [page, setPage] = useState(0);
   const { blockedHosts, blockHost, unblockHost } = useBlockHosts();
+
+  const numPages = Math.ceil(Object.entries(blockedHosts).length / 5);
 
   return (
     <div>
       {blockedHosts ? (
-        <ul className="tuxedo__blocked-site-list">
-          {Object.entries(blockedHosts).map(
-            ([host, val]) =>
-              val && (
-                <ListItemBlockedSite
-                  host={host}
-                  unblock={() => unblockHost(host)}
-                />
-              )
+        <div>
+          <ul className="tuxedo__blocked-site-list">
+            {Object.entries(blockedHosts)
+              .slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE)
+              .map(
+                ([host, val]) =>
+                  val && (
+                    <ListItemBlockedSite
+                      host={host}
+                      unblock={() => unblockHost(host)}
+                    />
+                  )
+              )}
+          </ul>
+          {numPages > 1 && (
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <button
+                className={`tuxedo__icon-button ${
+                  page === 0 && 'tuxedo__icon-button-disabled'
+                }`}
+                onClick={() => setPage(page - 1)}
+                disabled={page === 0}
+                style={{ margin: 2 }}
+              >
+                <LeftIcon />
+              </button>
+              {Array.from(Array(numPages)).map((_, i) => {
+                return (
+                  <button
+                    className={`tuxedo__icon-button ${
+                      page === i && 'tuxedo__icon-button-active'
+                    }`}
+                    onClick={() => setPage(i)}
+                    style={{ margin: 2 }}
+                  >
+                    {i}
+                  </button>
+                );
+              })}
+              <button
+                className={`tuxedo__icon-button ${
+                  page >= numPages - 1 && 'tuxedo__icon-button-disabled'
+                }`}
+                onClick={() => setPage(page + 1)}
+                disabled={page >= numPages - 1}
+                style={{ margin: 2 }}
+              >
+                <RightIcon />
+              </button>
+            </div>
           )}
-        </ul>
+        </div>
       ) : (
         <p>No hosts blocked</p>
       )}
+
+      <br />
 
       <BlockSiteInput blockHost={blockHost} />
     </div>
@@ -44,13 +97,21 @@ function BlockSiteInput({ blockHost }) {
 
   return (
     <div>
-      <label>
-        <div>Add site</div>
-        <input value={val} onChange={(e) => setVal(e.target.value)} />
-      </label>
-      <button type="submit" onClick={() => blockHost(val)}>
-        Block!
-      </button>
+      <label htmlFor="tuxedo__site-input">Add site</label>
+      <div className="tuxedo__form-input">
+        <input
+          name="tuxedo__site-input"
+          value={val}
+          onChange={(e) => setVal(e.target.value)}
+        />
+        <PlusButton
+          type="submit"
+          onClick={() => {
+            blockHost(val);
+            setVal('');
+          }}
+        />
+      </div>
     </div>
   );
 }
@@ -67,6 +128,7 @@ function ListItemBlockedSite({ host, unblock }) {
             className="tuxedo__blocked-site-icon"
             src={`https://icons.duckduckgo.com/ip2/${host}.ico`}
             onError={({ target }) => {
+              // Fallback to displaying an icon made from first letter of domain
               target.onError = null;
               setHasImgLoadErr(true);
             }}
@@ -75,16 +137,8 @@ function ListItemBlockedSite({ host, unblock }) {
         )}
         <span>{host}</span>
       </span>
-      <button onClick={unblock}>Remove</button>
+      <CrossButton onClick={unblock} />
     </li>
-  );
-}
-
-function LetterIcon({ letter }) {
-  return (
-    <span className="tuxedo__blocked-site-icon tuxedo__blocked-site-icon-letter">
-      {letter}
-    </span>
   );
 }
 

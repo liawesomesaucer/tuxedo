@@ -1,6 +1,4 @@
 /* global chrome */
-console.log('woohoo')
-
 function addSiteFilter(id) {
   document.body.insertAdjacentHTML('beforeend', `<div ${id && `id="${id}"`} class="tuxedo"></div>'`);
 }
@@ -29,10 +27,13 @@ var enabled;
 const observer = new MutationObserver(function() {
   if (document.body) {
     chrome.storage.local.get(null, function(result) {
-      console.log(result)
-      if (isCurrentHostBlocked(Object.keys(result))) {
+      if (
+        isCurrentHostBlocked(
+          Object.fromEntries(Object.entries(result).filter(([k, v]) => !!v))
+        )
+      ) {
         enabled = true;
-        addSiteFilter('tuxedo-1')
+        addSiteFilter('tuxedo-1');
       }
     });
     observer.disconnect();
@@ -52,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // Handle if the current site gets blocked
 chrome.storage.onChanged.addListener(function (changes, namespace) {
   for (let [key, { newValue }] of Object.entries(changes)) {
-    if (new URL(window.location).host === key && newValue) {
+    if (window.location.host === key && newValue) {
       addSiteFilter()
     }
   }

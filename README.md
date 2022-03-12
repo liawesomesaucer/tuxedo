@@ -12,10 +12,8 @@ The intention of this application to provide (1) minor annoyance/friction and (2
 
 ## Product roadmap
 
-* Allow custom sites
-* Cooldown on additions
-* Cannot
-* Support Favicons
+* Splash page
+* Artdeco font
 
 ## Why don't you just set the entire screen to black, Vincent?
 
