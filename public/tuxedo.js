@@ -29,7 +29,7 @@ const observer = new MutationObserver(function() {
     chrome.storage.local.get(null, function(result) {
       if (
         isCurrentHostBlocked(
-          Object.fromEntries(Object.entries(result).filter(([k, v]) => !!v))
+          Object.entries(result).filter(([k, v]) => !!v).map(([k, v]) => k)
         )
       ) {
         enabled = true;

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useChromeSyncStorage } from './useChromeSyncStorage';
 
 // Keeps blocked sites in sync with useChromeSyncStorage
