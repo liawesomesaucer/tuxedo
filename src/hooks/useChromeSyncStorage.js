@@ -1,5 +1,5 @@
 /* global chrome */
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 /**
  * This hook keeps chrome storage up to date with the state in `storageValue`

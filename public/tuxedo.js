@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // Handle if the current site gets blocked
 chrome.storage.onChanged.addListener(function (changes, namespace) {
   for (let [key, { newValue }] of Object.entries(changes)) {
-    if (window.location.host === key && newValue) {
+    if (window.location.host.includes(key) && newValue) {
       addSiteFilter()
     }
   }
