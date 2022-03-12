@@ -1,5 +1,7 @@
 # Tuxedo
 
+<img width="1327" alt="Screen Shot 2022-03-12 at 11 37 27 AM" src="https://user-images.githubusercontent.com/8205461/158032471-523f8fe1-6abc-49b3-b591-e1b8cb6befc8.png">
+
 Turn your screen to black and white on selected websites.
 
 ## Current support
