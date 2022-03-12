@@ -14,6 +14,16 @@ The intention of this application to provide (1) minor annoyance/friction and (2
 
 Yes, Tuxedo makes it easy to remove sites after they are added.
 
+## Installation
+
+You can install via downloading this repository, heading to Chrome > Manage Extensions, and clicking "Load unpacked", and selecting the `build` folder in this repository.
+
+Eventually I'll launch this on the Chrome web store...someday
+
+## Development
+
+I run `npm run watch:dev`, to work on the extension, but it doesn't pick up changes in `public` for now.
+
 ## Product roadmap
 
 * Splash page
